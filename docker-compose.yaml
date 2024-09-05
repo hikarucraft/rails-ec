@@ -14,11 +14,15 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
+      RAILS_ENV: development
     volumes:
-      - .:/myapp
+      - .:/rails
+      - bundle:/usr/local/bundle
     ports:
       - "3000:3000"
     depends_on:
       - db
+    tty: true
 volumes:
+  bundle:
   postgres_volume:
