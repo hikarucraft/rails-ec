@@ -28,6 +28,13 @@ RSpec.describe User, type: :model do
         expect(user.errors.full_messages).to include("Email is invalid")
       end
     end
+    it 'email should be unique' do
+      user = User.new(name: "Alice", email: "old_email@example.com")
+      duplicate_user = user.dup
+      duplicate_user.email = user.email.upcase
+      user.save
+      expect(duplicate_user).not_to be_valid
+    end
     
   end
 end
