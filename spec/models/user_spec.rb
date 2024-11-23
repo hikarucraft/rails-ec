@@ -6,6 +6,8 @@ RSpec.describe User, type: :model do
     let(:user_email_no_precense){FactoryBot.build(:user,email:"   ")}
     let(:user_name_over_50_chars){FactoryBot.build(:user,name:"a" * 51, email:"hoge@example.com")}
     let(:user_email_over_255_chars){FactoryBot.build(:user,email:"a" * 244 + "@example.com")}
+    let(:user_password_blank){FactoryBot.build(:user,password:" " * 6)}
+    let(:user_password_max_5_chars){FactoryBot.build(:user,password:"a" * 5)}
     it 'name is invalid' do
       expect(user_name_no_precense).not_to be_valid
       expect(user_name_no_precense.errors.full_messages).to eq(["Name can't be blank"])
@@ -39,6 +41,14 @@ RSpec.describe User, type: :model do
       user.save
       expect(duplicate_user).not_to be_valid
       expect(duplicate_user.errors.full_messages).to eq(["Email has already been taken"])
+    end
+    it 'password is invalid' do
+      expect(user_password_blank).not_to be_valid
+      expect(user_password_blank.errors.full_messages).to eq(["Password can't be blank"])
+    end
+    it 'password is invalid' do
+      expect(user_password_max_5_chars).not_to be_valid
+      expect(user_password_max_5_chars.errors.full_messages).to eq(["Password is too short (minimum is 6 characters)"])
     end
     
   end
