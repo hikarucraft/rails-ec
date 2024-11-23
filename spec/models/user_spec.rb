@@ -8,32 +8,37 @@ RSpec.describe User, type: :model do
     let(:user_email_over_255_chars){FactoryBot.build(:user,email:"a" * 244 + "@example.com")}
     it 'name is invalid' do
       expect(user_name_no_precense).not_to be_valid
+      expect(user_name_no_precense.errors.full_messages).to eq(["Name can't be blank"])
     end
     it 'email is invalid' do
       expect(user_email_no_precense).not_to be_valid
+      expect(user_email_no_precense.errors.full_messages).to eq(["Email can't be blank", "Email is invalid"])
     end
     it 'name is invalid' do
       expect(user_name_over_50_chars).not_to be_valid
+      expect(user_name_over_50_chars.errors.full_messages).to eq(["Name is too long (maximum is 50 characters)"])
     end
     it 'email is invalid' do
       expect(user_email_over_255_chars).not_to be_valid
+      expect(user_email_over_255_chars.errors.full_messages).to eq(["Email is too long (maximum is 255 characters)"])
     end
     it 'email is invalid' do
-      user = User.new(name: "Alice", email: "old_email@example.com")
+      user = User.new(name: "Alice", email: "old_email@example.com",password:"foobar")
       invalid_addresses = %w[user@example,com user_at_foo.org user.name@example.
                            foo@bar_baz.com foo@bar+baz.com]
       invalid_addresses.each do |invalid_address|
         user.email = invalid_address
         user.valid? #run validation. necessary.
-        expect(user.errors.full_messages).to include("Email is invalid")
+        expect(user.errors.full_messages).to eq(["Email is invalid"])
       end
     end
     it 'email should be unique' do
-      user = User.new(name: "Alice", email: "old_email@example.com")
+      user = User.new(name: "Alice", email: "old_email@example.com",password:"foobar")
       duplicate_user = user.dup
       duplicate_user.email = user.email.upcase
       user.save
       expect(duplicate_user).not_to be_valid
+      expect(duplicate_user.errors.full_messages).to eq(["Email has already been taken"])
     end
     
   end
