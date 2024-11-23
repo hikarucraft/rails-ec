@@ -34,6 +34,11 @@ RSpec.describe User, type: :model do
         expect(user.errors.full_messages).to eq(["Email is invalid"])
       end
     end
+    it 'password and password_confirmation must match' do
+      user = User.new(name: "Alice", email: "old_email@example.com",password:"foobar",password_confirmation:"barfoo")
+      expect(user).not_to be_valid
+      expect(user.errors.full_messages).to eq(["Password confirmation doesn't match Password"])
+    end
     it 'email should be unique' do
       user = User.new(name: "Alice", email: "old_email@example.com",password:"foobar")
       duplicate_user = user.dup
