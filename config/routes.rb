@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get "static_pages/home"
+  get "static_pages/about"
+  get "/help", to: 'static_pages#help'
+  get "/contact", to: 'static_pages#contact', as: 'contact_renamed' 
   get "users/new"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
