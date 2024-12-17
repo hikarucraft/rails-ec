@@ -16,7 +16,7 @@ services:
       POSTGRES_PASSWORD: password
       RAILS_ENV: development
     volumes:
-      - .:/rails
+      - .:/myapp
       - bundle:/usr/local/bundle
     ports:
       - "3000:3000"

@@ -77,6 +77,7 @@ GEM
     ast (2.4.2)
     backport (1.2.0)
     base64 (0.2.0)
+    bcrypt (3.1.20)
     benchmark (0.3.0)
     bigdecimal (3.1.8)
     bindex (0.8.1)
@@ -106,6 +107,12 @@ GEM
     drb (2.2.1)
     e2mmap (0.1.0)
     erubi (1.13.0)
+    factory_bot (6.5.0)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.4.4)
+      factory_bot (~> 6.5)
+      railties (>= 5.0.0)
+    ffi (1.17.0)
     ffi (1.17.0-arm64-darwin)
     formatador (1.1.0)
     globalid (1.2.1)
@@ -261,6 +268,23 @@ GEM
     reverse_markdown (2.1.1)
       nokogiri
     rexml (3.3.7)
+    rspec-core (3.13.2)
+      rspec-support (~> 3.13.0)
+    rspec-expectations (3.13.3)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.13.0)
+    rspec-mocks (3.13.2)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.13.0)
+    rspec-rails (7.0.1)
+      actionpack (>= 7.0)
+      activesupport (>= 7.0)
+      railties (>= 7.0)
+      rspec-core (~> 3.13)
+      rspec-expectations (~> 3.13)
+      rspec-mocks (~> 3.13)
+      rspec-support (~> 3.13)
+    rspec-support (3.13.1)
     rubocop (1.66.1)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
@@ -368,10 +392,12 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  bcrypt (~> 3.1.7)
   bootsnap
   brakeman
   capybara
   debug
+  factory_bot_rails
   guard
   guard-minitest
   importmap-rails
@@ -383,6 +409,7 @@ DEPENDENCIES
   rails (~> 7.2.1)
   rails-controller-testing
   repl_type_completor
+  rspec-rails
   rubocop-rails-omakase
   sassc-rails
   selenium-webdriver
